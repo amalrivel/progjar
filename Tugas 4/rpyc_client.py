@@ -9,7 +9,7 @@ def main():
     while True:
         config = {'allow_public_attrs': True}
         proxy = rpyc.connect('localhost', 18861, config=config)
-        print("Input Client: ")
+        print("Input Client:")
         input_msg = input("> ")
         first_split = input_msg.split()
         print(proxy.root.exeCommand(input_msg))

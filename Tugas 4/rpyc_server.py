@@ -70,6 +70,7 @@ class MyService(rpyc.Service):
             return messages
 
         elif commands[0] == "quit":
+            print('Server shutdown...')
             sys.exit(0)
             
 if __name__ == '__main__':

@@ -9,12 +9,6 @@ from jsonrpclib.SimpleJSONRPCServer import SimpleJSONRPCServer
 import argparse, socket
 import sys
 import glob
-import pathlib
-import os
-import time
-
-
-
 
 def lengths(*args):
     """Measure the length of each input argument.
@@ -31,20 +25,13 @@ def lengths(*args):
         except TypeError:
             arglen = None
         results.append((arglen, arg))
-    # return arg
     second_text = arg.split()
     if second_text[0] == "ping":
         remove_ping = second_text[1:]
         join_now = ' '.join(remove_ping)
-        # print('  Textnya :', repr(join_now))
-        # print('  Message len:', repr(len(join_now)))
         return join_now
 
     if second_text[0] == "exit":
-        # print('Server shutdown...') 
-        # time.sleep(2)
-        # print('Client shutdown...') 
-        # server.shutdown()
         return arg
 
         
@@ -58,60 +45,40 @@ def lengths(*args):
 
         f=open(path_file,"rb")
         b=f.read()
-        length = len(b)
 
-        # print('Fetch:',path) 
-        # print('size :',length)
-        # print('lokal :',name_file)
         new_length = b"%03d" % (len(b),) 
         output = path.encode() + space.encode() + new_length + space.encode() + name_file.encode() 
         argu = output.decode()
-        # len_output = b"%03d" % (len(output.decode()),) 
         return argu
 
     if second_text[0] == "ls":
-        # path = "*.py"
-        # for file in glob.glob(path, recursive=True):
-        #     print(file)
-        # if len(second_text) == 1:
-        #     dest = '*.py'
         if len(second_text) == 1:
             dest = '*.py'
 
         if len(second_text) == 2:
             dest = second_text[1]
-        # if second_text[1] != "":
-        #     dest = second_text[1]
+
         list_file =  glob.glob(dest)
         space = ''
         for i in list_file:
             space += i + '\n'
 
-        # print('Output:')
-        # print(space)
         return space
 
     if second_text[0] == "count":
-        # path = "*.py"
-        # for file in glob.glob(path, recursive=True):
-        #     print(file)
-        # if len(second_text) == 1:
-        #     dest = '*.py'
+
         if len(second_text) == 1:
             dest = '*.py'
 
         if len(second_text) == 2:
             dest = second_text[1]
-        # if second_text[1] != "":
-        #     dest = second_text[1]
+
         list_file =  glob.glob(dest)
         space = ''
         for i in list_file:
             space += i + '\n'
 
         count =  len(list_file)
-        # print('Output:')
-        # print(space)
         return count
 
 
